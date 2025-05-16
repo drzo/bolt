@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JuliaBolt - AI Playground</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="bg-gray-100 h-screen flex flex-col">
+    <header class="bg-white shadow p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-blue-600">JuliaBolt</h1>
+            <nav class="flex space-x-4">
+                <button id="configBtn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Configure</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto flex flex-1 p-4 overflow-hidden">
+        <div class="flex flex-col w-full h-full bg-white rounded shadow overflow-hidden">
+            <!-- Model selection -->
+            <div class="p-4 border-b flex items-center space-x-4">
+                <label for="provider" class="font-medium">Provider:</label>
+                <select id="provider" class="border rounded p-2">
+                    <option value="">Select a provider</option>
+                </select>
+                
+                <label for="model" class="font-medium">Model:</label>
+                <select id="model" class="border rounded p-2">
+                    <option value="">Select a model</option>
+                </select>
+            </div>
+            
+            <!-- Chat interface -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <div id="chatHistory" class="flex-1 p-4 overflow-y-auto"></div>
+                
+                <div class="border-t p-4">
+                    <div class="flex">
+                        <textarea id="userInput" class="flex-1 border rounded p-2 mr-2" rows="3" placeholder="Type your message here..."></textarea>
+                        <button id="sendBtn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Configuration modal -->
+    <div id="configModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded shadow-lg p-6 w-full max-w-lg">
+            <h2 class="text-xl font-bold mb-4">LLM Provider Configuration</h2>
+            
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 gap-4">
+                    <div>
+                        <label for="openaiKey" class="block mb-1">OpenAI API Key</label>
+                        <input id="openaiKey" type="password" class="border rounded p-2 w-full" placeholder="sk-...">
+                    </div>
+                    
+                    <div>
+                        <label for="anthropicKey" class="block mb-1">Anthropic API Key</label>
+                        <input id="anthropicKey" type="password" class="border rounded p-2 w-full" placeholder="sk-ant-...">
+                    </div>
+                    
+                    <div>
+                        <label for="groqKey" class="block mb-1">Groq API Key</label>
+                        <input id="groqKey" type="password" class="border rounded p-2 w-full" placeholder="gsk_...">
+                    </div>
+                    
+                    <div>
+                        <label for="mistralKey" class="block mb-1">Mistral API Key</label>
+                        <input id="mistralKey" type="password" class="border rounded p-2 w-full">
+                    </div>
+                    
+                    <div>
+                        <label for="ollamaUrl" class="block mb-1">Ollama Base URL</label>
+                        <input id="ollamaUrl" type="text" class="border rounded p-2 w-full" value="http://127.0.0.1:11434">
+                    </div>
+                </div>
+                
+                <div class="flex justify-end space-x-2 mt-4">
+                    <button id="cancelConfigBtn" class="px-4 py-2 border rounded hover:bg-gray-100">Cancel</button>
+                    <button id="saveConfigBtn" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
